@@ -1,10 +1,6 @@
 
 
-<<<<<<< Updated upstream
 export default function printMessage (
-=======
-export default function errorMessage (
->>>>>>> Stashed changes
     success: boolean,
     message: string,
     status: number
