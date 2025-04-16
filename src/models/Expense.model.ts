@@ -1,18 +1,10 @@
 import mongoose, { Document } from 'mongoose'
 
 
-enum ExpenseCategory {
-    Rent = "Rent",
-    Groceries = "Groceries",
-    Bills = "Bills",
-    School = "School",
-    Entertainment = "Entertainment",
-    Misc = "Misc",
-    Travel = "Travel"
-}
+
 interface ExpenseInterface extends Document {
     userId: mongoose.Types.ObjectId,
-    category: ExpenseCategory,
+    category: string,
     amount: number,
     description?: string,
     date: Date,
@@ -23,13 +15,13 @@ interface ExpenseInterface extends Document {
 const ExpenseSchema = new mongoose.Schema<ExpenseInterface>({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "user",
         required: true
     },
     category: {
         type: String,
         required: true,
-        enum: Object.values(ExpenseCategory)
+        
     },
     amount: {
         type: Number,

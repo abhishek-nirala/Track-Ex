@@ -1,36 +1,36 @@
 import mongoose, { Document } from 'mongoose'
 
 
-enum UserRole{
-    admin = "admin",
-    user = "user"
-}
+// enum UserRole{
+//     admin = "admin",
+//     user = "user"
+// }
 export interface UserInterface extends Document {
+
     name: string,
     email: string,
-    password: string,
     phone?: string,
+    profileImg:string,
     currency?: string,
     preferences?: {
         auto_reminders: boolean,
         auto_payment_updates: boolean
     },
-    role: UserRole,
     createdAt: Date,
     expenseId?: mongoose.Types.ObjectId
     billId?: mongoose.Types.ObjectId
-    jwtToken: string,
-    otpCode: number,
-    otpCodeExpiry:Date
+
+
 }
 
 const UserSchema = new mongoose.Schema<UserInterface>({
+
     name: {
         type: String,
         required: true,
         trim: true,
         minlength: [2, "The name should be more than 2 characters."],
-        maxlength: [20, "The name should be less than 20 characters."],
+        maxlength: [30, "The name should be less than 30 characters."],
         match: [/^[A-Za-z]{2,20}(?: [A-Za-z]{2,20})*$/, "Please a valid name and also ensure do not give extra space "]
 
     },
@@ -41,14 +41,14 @@ const UserSchema = new mongoose.Schema<UserInterface>({
         match: [/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi, "Please Enter Valid Email"]
 
     },
-    password:
-    {
+    profileImg: {
         type: String,
         required: true
     },
+ 
     phone: {
         type: String,
-        required: true
+        // required: true
     },
     currency: {
         type: String,
@@ -64,27 +64,12 @@ const UserSchema = new mongoose.Schema<UserInterface>({
             default: true
         }, // Reflect payments automatically
     },
-    role: {
-        type: String,
-        enum:Object.values(UserRole),
-        default: UserRole.user
-    },
+ 
     createdAt: {
         type: Date,
         default: Date.now
     },
-    jwtToken: {
-        type: String,
-        required: true
-    },
-    otpCode: {
-        type: Number,
-        required: true
-    },
-    otpCodeExpiry:{
-        type:Date,
-        required:true
-    },
+
     expenseId: mongoose.Schema.Types.ObjectId,
     billId: mongoose.Schema.Types.ObjectId
 
