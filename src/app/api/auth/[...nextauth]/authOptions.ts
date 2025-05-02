@@ -1,4 +1,3 @@
-
 import connectDb from "@/lib/connectDb"
 import { NextAuthOptions } from "next-auth"
 import Google from "next-auth/providers/google"
@@ -15,8 +14,9 @@ export const authOptions: NextAuthOptions = ({
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
 
+      console.log("account : ", account);
       let isAllowedToSignIn = false;
 
       await connectDb();
@@ -36,18 +36,43 @@ export const authOptions: NextAuthOptions = ({
         )
         if (response.acknowledged) isAllowedToSignIn = true;
       } catch (err) {
-        console.log("couldn't be able to sign-in! Please try again",err)
+        console.log("couldn't be able to sign-in! Please try again", err)
         printMessage(false, "couldn't be able to sign-in! Please try again", 400)
       }
 
       if (isAllowedToSignIn) return true;
       else {
         printMessage(false, "couldn't be able to sign-in! Please try again", 400)
-        console.log('isAllowedToSignIn',isAllowedToSignIn);
-        
+        console.log('isAllowedToSignIn', isAllowedToSignIn);
+
         return false;
       }
     },
+    // async jwt({ user, token }) {
+    //   if (user) {
+    //     token.email = user.email;
+    //     token.name = user.name;
+    //     token.image = user.image;
+    //   }
+    //   return token
+    // },
+    // async session({ token, session }) {
+    //   if (token) {
+    //     if (session.user) {
+    //       session.user.email = token.email;
+    //       session.user.name = token.name;
+    //       // session.user.image = user.image
+    //     }
+    //   }
+    //   return session;
+    // }
   },
-  secret: process.env.AUTH_SECRET!
+  // session: {
+  //   strategy: 'jwt'
+  // },
+  // jwt: {
+
+  //   secret: process.env.NEXTAUTH_SECRET!
+  // }
+
 })

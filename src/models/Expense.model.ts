@@ -1,9 +1,8 @@
 import mongoose, { Document } from 'mongoose'
 
-
-
-interface ExpenseInterface extends Document {
-    userId: mongoose.Types.ObjectId,
+export interface ExpenseInterface extends Document {
+    // userId: mongoose.Types.ObjectId,
+    email:string;
     category: string,
     amount: number,
     description?: string,
@@ -13,10 +12,14 @@ interface ExpenseInterface extends Document {
 }
 
 const ExpenseSchema = new mongoose.Schema<ExpenseInterface>({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        required: true
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "user",
+    //     required: true
+    // },
+    email:{
+        type: String,
+        required: true,
     },
     category: {
         type: String,

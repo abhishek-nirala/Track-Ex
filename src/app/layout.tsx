@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Send-it",
+  title: "Track-EX",
   description: "Send Your Bills and Look up your expenses at one place",
 };
 
