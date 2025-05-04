@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
 
-export default function printMessage (
+export default function printMessage<T> (
     success: boolean,
-    message: string,
+    message: T,
     status: number
 ) {
     return NextResponse.json({
