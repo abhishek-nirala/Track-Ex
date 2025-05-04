@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
+import axios from 'axios'
 // import { ExpenseInterface } from "@/models/Expense.model"
 
 
@@ -26,6 +27,16 @@ export default function Expense() {
 
     const {data:session} = useSession()
 
+    const handleFetchExpense = async()=>{
+        try {
+            const response = await axios.get('/api/expense')
+            if(response.data.success){
+                console.log(response.data.message)
+            }
+        } catch (error) {
+           console.log("error: ",error) 
+        }
+    }
 
     const formSchema = z.object({
         category: z.string().min(2, {
@@ -52,11 +63,22 @@ export default function Expense() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
+        try{
+            // const {category, amount, description} = values;
+            // console.log("cad: ", category, amount, description)
+            const response = await axios.post("/api/expense",values)
+            if(response){
+                console.log(response.data.message)
+            }
+        }catch(e){
+            console.log("error @expense/page.tsx : ",e)
+        }
     }
     return (<>
         <h1 className="text-3xl">{session?.user?.email}</h1>
+        <Button onClick={handleFetchExpense}>click me!</Button>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField

@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 
 
 export default function printMessage (
@@ -5,7 +6,7 @@ export default function printMessage (
     message: string,
     status: number
 ) {
-    return Response.json({
+    return NextResponse.json({
         success: success,
         message: message,
     }, { status: status })

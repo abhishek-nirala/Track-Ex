@@ -46,6 +46,6 @@ const ExpenseSchema = new mongoose.Schema<ExpenseInterface>({
     }
 });
 
-const Expense = (mongoose.models.User as mongoose.Model<ExpenseInterface>) || mongoose.model<ExpenseInterface>('Expense', ExpenseSchema)
+const ExpenseModel = (mongoose.models.Expense as mongoose.Model<ExpenseInterface>) || mongoose.model<ExpenseInterface>('Expense', ExpenseSchema)
 
-export default Expense;
+export default ExpenseModel;

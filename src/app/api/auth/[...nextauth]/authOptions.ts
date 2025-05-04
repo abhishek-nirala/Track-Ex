@@ -1,7 +1,6 @@
 import connectDb from "@/lib/connectDb"
 import { NextAuthOptions } from "next-auth"
 import Google from "next-auth/providers/google"
-import profileImg from '../../../../../public/send-it-logo.png';
 import User from "@/models/User.model";
 import printMessage from "@/errorMsg";
 
@@ -14,14 +13,15 @@ export const authOptions: NextAuthOptions = ({
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user }) {
 
-      console.log("account : ", account);
+      // console.log("account : ", account);
+      // console.log("user @authoptions.ts : ", user)
       let isAllowedToSignIn = false;
 
       await connectDb();
       try {
-
+        const profileImg = '/send-it-logo.png'
         const response = await User.updateOne(
           {
             email: user.email
