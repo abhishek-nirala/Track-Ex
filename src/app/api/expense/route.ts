@@ -6,28 +6,77 @@ import { NextRequest } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getToken, } from "next-auth/jwt";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions)
     if (!session) {
         return printMessage(false, "Unauthorize! Please Login to access Protected content.", 401);
     }
     console.log('logged-in!')
+
+    // const filter: string[] = request.nextUrl.searchParams.getAll("filter")
+    // console.log("keys @expense/route.ts: ",filter)
+    //   console.log("getAll : ", request.nextUrl.searchParams.getAll("filter"))
+
+
+    // console.log("GET method ended!")
+    // return printMessage(true, "testing!!!",200)
     await connectDb();
 
     try {
         const email = session?.user?.email;
-        const response = await Expense.aggregate([
-            {
-                $match: {
-                    email
-                }
-            },
-            { $sort: { date: -1 } }
-        ])
+
+        // if (filter.includes("days")) {
+        //     const response = await Expense.aggregate([
+        //         {
+        //             $match: {
+        //                 email
+        //                 //TODO: match based on days
+        //             }
+        //         },
+        //         { $sort: { date: -1 } }
+        //     ])
+        //     if (response) {
+        //         console.log("Expense's route response : ", response)
+        //         //TODO:check the returned response.
+        //         return printMessage(true, `${response}`, 200)
+        //     }
+
+        // }
+        // if (filter.includes("month")) {
+
+        // }
+        // if (filter.includes("category")) {
+        //     const category = request.nextUrl.searchParams.get("category")
+        //     const response = await Expense.aggregate([
+        //         {
+        //             $match: {
+        //                 email,
+        //                 category
+        //             }
+        //         },
+        //         {
+        //             $group: {
+        //                 _id: "$category",
+        //                 totalSpent: { $sum: "$amount" },
+        //                 count: { $count: {} }
+        //             }
+        //         }
+        //     ])
+        //     if (response) {
+        //         console.log("Expense's route response : ", response)
+        //         //TODO:check the returned response.
+        //         return printMessage(true, `${response}`, 200)
+        //     }
+
+        // }
+        // if (filter.includes("amount")) {
+
+        // }
+        const response = await Expense.find({ email }).sort({date: -1}) //retrieve the most recent one.
         if (response) {
-            console.log("Expense's route response : ", response)
-            //TODO:check the returned response.
-            return printMessage(true, `${response}`, 200)
+            // console.log("Expense's route response : ", response)
+
+            return printMessage(true, response, 200)
         }
     } catch (error) {
         console.log("Error while fetching Expense item : ", error)

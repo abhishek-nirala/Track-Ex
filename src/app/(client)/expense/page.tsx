@@ -18,23 +18,25 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import axios from 'axios'
+// import RenderTable from '@/component/expense-table/render-table'
 // import { ExpenseInterface } from "@/models/Expense.model"
+
 
 
 
 
 export default function Expense() {
 
-    const {data:session} = useSession()
+    const { data: session } = useSession()
 
-    const handleFetchExpense = async()=>{
+    const handleFetchExpense = async () => {
         try {
             const response = await axios.get('/api/expense')
-            if(response.data.success){
+            if (response.data.success) {
                 console.log(response.data.message)
             }
         } catch (error) {
-           console.log("error: ",error) 
+            console.log("error: ", error)
         }
     }
 
@@ -65,18 +67,70 @@ export default function Expense() {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
-        try{
+        try {
             // const {category, amount, description} = values;
             // console.log("cad: ", category, amount, description)
-            const response = await axios.post("/api/expense",values)
-            if(response){
+            const response = await axios.post("/api/expense", values)
+            if (response) {
                 console.log(response.data.message)
             }
-        }catch(e){
-            console.log("error @expense/page.tsx : ",e)
+        } catch (e) {
+            console.log("error @expense/page.tsx : ", e)
         }
     }
     return (<>
+
+
+        {/* <div className="h-screen">
+
+            <div className="h-full w-full">
+
+                <div className="block sm:hidden h-full">
+                    <div className="top w-full h-[45%] bg-blue-300">Top</div>
+                    <div className="mid w-full h-[45%] bg-green-300">Mid</div>
+                    <div className="bottom w-full h-[20%] bg-red-300">Bottom</div>
+                </div>
+
+                <div className="hidden sm:flex flex-col h-full"> */}
+                    {/* top */}
+                    {/* <div className="top flex h-1/2 w-full bg-gray-100">
+                        <div className="left w-1/2 h-full bg-blue-300">Left</div>
+                        <div className="right w-1/2 h-full bg-green-300">Right</div>
+                    </div> */}
+                    {/* bottom */}
+                    {/* <div className="bottom h-1/2 w-full bg-red-300">
+
+                        <RenderTable/>
+                    </div>
+                </div>
+            </div>
+        </div >
+ */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <h1 className="text-3xl">{session?.user?.email}</h1>
         <Button onClick={handleFetchExpense}>click me!</Button>
         <Form {...form}>
@@ -104,7 +158,7 @@ export default function Expense() {
                         <FormItem>
                             <FormLabel>Amount</FormLabel>
                             <FormControl>
-                                <Input  placeholder="100" {...field} />
+                                <Input placeholder="100" {...field} />
                             </FormControl>
                             <FormDescription>
                                 Amount to be added.
@@ -118,7 +172,7 @@ export default function Expense() {
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>description</FormLabel>
+                            <FormLabel>Description<span className="text-slate-500"> (optional)</span></FormLabel>
                             <FormControl>
                                 <Input placeholder="School Fee this month" {...field} />
                             </FormControl>

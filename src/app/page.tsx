@@ -1,9 +1,11 @@
 'use client'
 
+import { Button } from "@/components/button"
 import { useSession, signIn, signOut } from "next-auth/react"
 import Image from "next/image"
 export default function Home() {
   const { data: session } = useSession()
+  console.log("type of window : ", typeof window)
   if (session) {
     return (
       <>
@@ -19,14 +21,14 @@ export default function Home() {
           prefix=""
         />
         }
-        <button onClick={() => signOut()}>Sign out</button>
+        <Button className="m-5" onClick={() => signOut()}>Sign out</Button>
       </>
     )
   }
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <Button className="m-5" onClick={() => signIn()}>Sign in</Button>
     </>
   )
 }
