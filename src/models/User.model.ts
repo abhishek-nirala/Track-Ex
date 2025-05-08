@@ -1,10 +1,6 @@
 import mongoose, { Document } from 'mongoose'
 
 
-// enum UserRole{
-//     admin = "admin",
-//     user = "user"
-// }
 export interface UserInterface extends Document {
 
     name: string,
@@ -52,7 +48,7 @@ const UserSchema = new mongoose.Schema<UserInterface>({
     },
     currency: {
         type: String,
-        default: "USD"
+        default: "INR"
     }, // User's preferred currency
     preferences: {
         auto_reminders: {

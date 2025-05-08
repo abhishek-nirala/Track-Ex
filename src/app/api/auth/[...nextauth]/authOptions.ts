@@ -15,8 +15,6 @@ export const authOptions: NextAuthOptions = ({
   callbacks: {
     async signIn({ user }) {
 
-      // console.log("account : ", account);
-      // console.log("user @authoptions.ts : ", user)
       let isAllowedToSignIn = false;
 
       await connectDb();
@@ -56,14 +54,13 @@ export const authOptions: NextAuthOptions = ({
     //   }
     //   return token
     // },
-    // async session({ token, session }) {
-    //   if (token) {
+    // async session({user, session }) {
     //     if (session.user) {
     //       session.user.email = token.email;
     //       session.user.name = token.name;
     //       // session.user.image = user.image
     //     }
-    //   }
+
     //   return session;
     // }
   },
