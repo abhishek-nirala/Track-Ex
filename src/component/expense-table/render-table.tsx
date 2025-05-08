@@ -1,33 +1,37 @@
 'use client'
-import { useCallback, useEffect, useState } from "react";
+import { useExpenseStore } from "@/lib/useExpenseStore"
 import { columns } from "./column"
 import { DataTable } from "./data-table"
-import axios from "axios";
-import { ExpenseInterface } from "@/models/Expense.model";
+import { ExpenseInterface } from "@/models/Expense.model"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 
 export default function DemoPage() {
 
-    const [tableData, setTableData] = useState<ExpenseInterface[]>([])
-
-    const fetchData = useCallback(async () => {
-        try {
-            const response = await axios.get("/api/expense");
-            setTableData(response.data.message);
-        } catch (e) {
-            console.log("error @render-table.tsx", e);
+    const [data, setData] = useState<ExpenseInterface[]>([])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("/api/expense")
+                if (response.data && response.data.success) {
+                    setData(response.data.message)
+                }
+            } catch (error) {
+                console.log("error@render-table: ", error)
+            }
         }
-    }, []);
+        fetchData();
+    }, [])
+    const setExpense = useExpenseStore((state) => state.setExpense);
 
     useEffect(() => {
-        fetchData()
-    }, [fetchData])
-
-
+        setExpense(data);
+    }, [data, setExpense]); // Dependency array ensures this runs only when `data` changes
 
     return (
         <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={tableData} />
+            <DataTable columns={columns} data={data} />
         </div>
     )
 }

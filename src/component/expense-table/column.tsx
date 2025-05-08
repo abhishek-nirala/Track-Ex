@@ -29,7 +29,15 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
 
     {
         accessorKey: "date",
-        header: () => <div className="text-left">Date</div>,
+        header: ({column}) => <div className="text-left">Date
+            <Button className="text-left border-4"
+                variant="ghost"
+                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+        </div>,
         cell: ({ row }) => {
             const date: Date = row.getValue("date")
             const formatted = new Intl.DateTimeFormat("en-US", {
@@ -49,15 +57,15 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
         accessorKey: "amount",
         header: ({ column }) => {
             return (<>
-            Amount
+                Amount
                 <Button className="text-left border-4"
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    
+
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
-                </>
+            </>
             )
         },
         cell: ({ row }) => {
@@ -90,11 +98,11 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
                         <DropdownMenuItem
                             onClick={() => navigator.clipboard.writeText(expense.id)}
                         >
-                            Copy expense ID
+                            Notes
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View expense details</DropdownMenuItem>
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

@@ -2,10 +2,12 @@
 import * as React from 'react'
 import {
     ColumnDef,
+    ColumnFiltersState,
     SortingState,
     getSortedRowModel,
     flexRender,
     getCoreRowModel,
+    getFilteredRowModel,
     getPaginationRowModel,
     useReactTable,
 } from "@tanstack/react-table"
@@ -19,6 +21,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/button"
+import { Input } from '@/components/ui/input'
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -30,6 +33,9 @@ export function DataTable<TData, TValue>({
     data,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
+    const [globalFilter, setGlobalFilters] = React.useState<ColumnFiltersState>(
+        []
+    )
 
     const table = useReactTable({
         data,
@@ -38,13 +44,28 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
+        onGlobalFilterChange: setGlobalFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        globalFilterFn: 'includesString',
         state: {
             sorting,
+            // columnFilters,
+            globalFilter
         },
     })
 
     return (
         <div>
+            <div className="flex items-center py-4">
+                <Input
+                    placeholder="Filter based on categories & amount"
+                    value={table.getState().globalFilter ?? ""}
+                    onChange={e => table.setGlobalFilter(String(e.target.value))}
+
+
+                    className="max-w-sm"
+                />
+            </div>
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>

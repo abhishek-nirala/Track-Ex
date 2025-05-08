@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getToken, } from "next-auth/jwt";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     const session = await getServerSession(authOptions)
     if (!session) {
         return printMessage(false, "Unauthorize! Please Login to access Protected content.", 401);
@@ -72,7 +72,24 @@ export async function GET(request: NextRequest) {
         // if (filter.includes("amount")) {
 
         // }
-        const response = await Expense.find({ email }).sort({date: -1}) //retrieve the most recent one.
+
+        const today = new Date()
+        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
+        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999)
+
+        const response = await Expense.aggregate([
+            { $match: { email } },
+            {
+                $match: {
+                    date: {
+                        $gte: firstDayOfMonth,
+                        $lte: lastDayOfMonth
+                    }
+                }
+            },
+            { $sort: { date: -1 } }
+
+        ]) //retrieves the most recent one & expenses of only the current month till date.
         if (response) {
             // console.log("Expense's route response : ", response)
 
