@@ -12,6 +12,17 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Dialog,
+    DialogContent,
+    // DialogDescription,
+    // DialogHeader,
+    // DialogTitle,
+    // DialogTrigger,
+} from "@/components/ui/dialog"
+import { useState } from "react"
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog"
+// import { useExpenseStore } from "@/lib/useExpenseStore"
 
 export const columns: ColumnDef<ExpenseInterface>[] = [
     {
@@ -29,7 +40,7 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
 
     {
         accessorKey: "date",
-        header: ({column}) => <div className="text-left">Date
+        header: ({ column }) => <div className="text-left">Date
             <Button className="text-left border-4"
                 variant="ghost"
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -82,32 +93,87 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
     {
         id: "actions",
         enableHiding: false,
-        cell: ({ row }) => {
-            const expense = row.original
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal />
-
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(expense.id)}
-                        >
-                            Notes
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        },
+        cell: ({ row }) => (
+            <ActionCell expense={row.original} />
+        )
     }
 
 ]
+
+type ActionCellProps = {
+    expense: ExpenseInterface;
+}
+
+
+const ActionCell: React.FC<ActionCellProps> = ({ expense }) => {
+    // const [dialogOpen, setDialogOpen] = useState(false);
+    const [activeDialog, setActiveDialog] = useState<{
+        type: 'view' | 'edit' | null;
+        item: ExpenseInterface | null;
+    }>({ type: null, item: null });
+
+    return (
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontal />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => {
+                        // setActiveDialog({ type: "view", item: expense })
+                        requestAnimationFrame(() => {
+                            setActiveDialog({ type: 'view', item: expense });
+                        });
+                    }}>
+                        View Note
+                    </DropdownMenuItem >
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => {
+                        requestAnimationFrame(() => {
+                            setActiveDialog({ type: 'edit', item: expense });
+                        });
+                    }}>
+                        Edit</DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => handleDeleteExpense(expense._id as string)}>
+                        Delete
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Dialog open={!!activeDialog.type} onOpenChange={() => {
+                setActiveDialog({ type: null, item: null })
+            }}>
+                <DialogTitle />
+                <DialogContent>
+                    {activeDialog.type === 'view' && (
+                        <div>
+                            <h2>Viewing Notes</h2>
+                            <p>{activeDialog.item?.description}</p>
+                        </div>
+                    )}
+
+                    {activeDialog.type === 'edit' && (
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            // call your update function here
+                        }}>
+                            <input defaultValue={activeDialog.item?.description} />
+                            <input defaultValue={activeDialog.item?.amount} />
+                            <button type="submit">Save</button>
+                        </form>
+                    )}
+                </DialogContent>
+                <DialogDescription />
+            </Dialog>
+        </>
+    );
+};
+
+const handleDeleteExpense = (id: string) => {
+    console.log("expense deleted!! test.", id)
+}
