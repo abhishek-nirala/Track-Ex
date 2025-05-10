@@ -6,14 +6,14 @@ import { NextRequest } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getToken, } from "next-auth/jwt";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions)
     if (!session) {
         return printMessage(false, "Unauthorize! Please Login to access Protected content.", 401);
     }
     console.log('logged-in!')
 
-    // const filter: string[] = request.nextUrl.searchParams.getAll("filter")
+    const filter: string[] = request.nextUrl.searchParams.getAll("filter")
     // console.log("keys @expense/route.ts: ",filter)
     //   console.log("getAll : ", request.nextUrl.searchParams.getAll("filter"))
 
@@ -25,16 +25,26 @@ export async function GET() {
     try {
         const email = session?.user?.email;
 
-        // if (filter.includes("days")) {
-        //     const response = await Expense.aggregate([
-        //         {
-        //             $match: {
-        //                 email
-        //                 //TODO: match based on days
-        //             }
-        //         },
-        //         { $sort: { date: -1 } }
-        //     ])
+        if (filter.includes("summary")) {
+            const response = await Expense.aggregate([
+                {
+                    $match: {
+                        email
+                        //TODO: match based on days
+                    }
+                },
+                {
+                    $group: {
+                        _id :{$toLower : "$category"} ,
+                        totalSpent: { $sum: "$amount" },
+                        count: { $count: {} }
+                    }
+                }
+            ])
+
+            // console.log("response@summary: ",response)
+            return printMessage(true, response, 200)
+        }
         //     if (response) {
         //         console.log("Expense's route response : ", response)
         //         //TODO:check the returned response.

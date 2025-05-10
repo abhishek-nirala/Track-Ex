@@ -1,0 +1,234 @@
+{
+  "message": [
+    {
+      "_id": "681c72c401e7591b791b3567",
+      "email": "doctordeath918@gmail.com",
+      "category": "movie",
+      "amount": 2500,
+      "description": "4 movie tickets ",
+      "recurring": false,
+      "date": "2025-05-08T09:00:52.422Z",
+      "__v": 0
+    },
+    {
+      "_id": "681c728301e7591b791b3565",
+      "email": "doctordeath918@gmail.com",
+      "category": "rent",
+      "amount": 1500,
+      "description": "rent of this month",
+      "recurring": false,
+      "date": "2025-05-08T08:59:47.939Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b222c98e30fb54dad61",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:54.163Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b222c98e30fb54dad5f",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:54.064Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad5d",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.874Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad5b",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.689Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad59",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.560Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad57",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.385Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad55",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.240Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b212c98e30fb54dad53",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:53.095Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b202c98e30fb54dad51",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:52.636Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b202c98e30fb54dad4f",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:52.387Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1f2c98e30fb54dad4d",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:51.878Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1f2c98e30fb54dad4b",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:51.390Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1f2c98e30fb54dad49",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:51.103Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1e2c98e30fb54dad47",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:50.605Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1d2c98e30fb54dad45",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:49.869Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b1c2c98e30fb54dad43",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:48.182Z",
+      "__v": 0
+    },
+    {
+      "_id": "68190b0d2c98e30fb54dad41",
+      "email": "doctordeath918@gmail.com",
+      "category": "sdfg",
+      "amount": 567,
+      "description": "sdfg",
+      "recurring": false,
+      "date": "2025-05-05T19:01:33.375Z",
+      "__v": 0
+    },
+    {
+      "_id": "6818faf12c98e30fb54dad19",
+      "email": "doctordeath918@gmail.com",
+      "category": "food",
+      "amount": 100,
+      "description": "late night order",
+      "recurring": false,
+      "date": "2025-05-05T17:52:49.426Z",
+      "__v": 0
+    },
+    {
+      "_id": "6818f2772c98e30fb54dad03",
+      "email": "doctordeath918@gmail.com",
+      "category": "Internet",
+      "amount": 250,
+      "description": "monthly phone recharge",
+      "recurring": false,
+      "date": "2025-05-05T17:16:39.909Z",
+      "__v": 0
+    },
+    {
+      "_id": "6817a4b9d5d95f88b3afdb8f",
+      "email": "doctordeath918@gmail.com",
+      "category": "metro ",
+      "amount": 600,
+      "description": "metro card topup ",
+      "recurring": false,
+      "date": "2025-05-04T17:32:41.149Z",
+      "__v": 0
+    },
+    {
+      "_id": "6817a403d5d95f88b3afdb8b",
+      "email": "doctordeath918@gmail.com",
+      "category": "milk",
+      "amount": 60,
+      "description": "bought 1l milk",
+      "recurring": false,
+      "date": "2025-05-04T17:29:39.810Z",
+      "__v": 0
+    }
+  ]
+}

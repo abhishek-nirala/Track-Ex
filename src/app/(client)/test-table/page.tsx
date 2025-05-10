@@ -1,10 +1,11 @@
 import React from 'react'
 import RenderTable from '@/component/expense-table/render-table'
+import TableSummary from '@/component/table-summary'
 
 export default function page() {
     return (
 
-        <div className="h-screen">
+        <div className="h-screen bg-black text-white ">
 
             <div className="h-full w-full">
 
@@ -16,9 +17,11 @@ export default function page() {
 
                 <div className="hidden sm:flex flex-col h-full">
                     {/* top */}
-                    <div className="top flex h-1/2 w-full bg-gray-100">
-                        <div className="left w-1/2 h-full bg-blue-300">Left</div>
-                        <div className="right w-1/2 h-full bg-green-300">Right</div>
+                    <div className="top flex h-1/2 w-full">
+                        <div className="left w-1/2 h-full">Left</div>
+                        <div className="right w-1/2 h-full">
+                            <TableSummary />
+                        </div>
                     </div>
                     {/* bottom */}
                     <div className="bottom h-1/2 w-full ">

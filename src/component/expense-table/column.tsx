@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { ExpenseInterface } from '@/models/Expense.model'
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
+import { ArrowUpDown, ArrowUpDownIcon, MoreHorizontal } from 'lucide-react'
 import { Button } from "@/components/button"
 import {
     DropdownMenu,
@@ -74,7 +74,7 @@ export const columns: ColumnDef<ExpenseInterface>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
 
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDownIcon className="ml-2 h-4 w-4" />
                 </Button>
             </>
             )

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { ExpenseInterface } from '@/models/Expense.model'
+// import { ExpenseInterface } from '@/models/Expense.model'
+import { ExpenseType } from '@/components/data-table';
 // import axios, { AxiosError } from 'axios'
 // import { useEffect, useState } from 'react'
 
@@ -7,9 +8,9 @@ import { ExpenseInterface } from '@/models/Expense.model'
 //     expenses: ExpenseInterface[]
 // }
 interface IExpenseState {
-  expenses: ExpenseInterface[];
-  setExpense: (newExpense: ExpenseInterface[]) => void;
-  addExpense: (expense: ExpenseInterface) => void;
+  expenses: ExpenseType[];
+  setExpense: (newExpense: ExpenseType[]) => void;
+  addExpense: (expense: ExpenseType) => void;
   removeAllExpenses: () => void;
 }
 
@@ -20,6 +21,21 @@ export const useExpenseStore = create<IExpenseState>((set) => ({
     addExpense: (expense) => set((state) => ({ expenses: [...state.expenses, expense] })),
     removeAllExpenses: () => set({ expenses: [] }),
 }))
+
+// type tSummary = {
+//   _id : string,
+//   totalSpent : number,
+//   count : number
+
+// }
+// interface IExpenseSummary {
+//   summary : tSummary[] 
+// }
+// export const useExpenseSummaryStore = create((set)=>{
+//   summary : []
+// })
+
+
 
 // export const useFetch = <T= unknown> (url: string) => {
 //     const [data, setData] = useState<T>();
