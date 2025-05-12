@@ -506,7 +506,7 @@ export function DataTable({
         <TabsList className="@4xl/main:flex hidden">
           <TabsTrigger value="outline">Outline</TabsTrigger>
           <TabsTrigger value="past-performance" className="gap-1">
-            Past Performance{" "}
+            Past Performance{"tofu"}
             <Badge
               variant="secondary"
               className="flex h-5 w-5 items-center justify-center rounded-full bg-muted-foreground/30"
@@ -577,7 +577,7 @@ export function DataTable({
             sensors={sensors}
             id={sortableId}
           >
-            <Table>
+            <Table >
               <TableHeader className="sticky top-0 z-10 bg-muted">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>

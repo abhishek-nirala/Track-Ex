@@ -16,26 +16,33 @@ interface IExpenseState {
 
 
 export const useExpenseStore = create<IExpenseState>((set) => ({
-    expenses : [],
-    setExpense: (newExpense) => set({ expenses: newExpense }),
-    addExpense: (expense) => set((state) => ({ expenses: [...state.expenses, expense] })),
-    removeAllExpenses: () => set({ expenses: [] }),
+  expenses: [],
+  setExpense: (newExpense) => set({ expenses: newExpense }),
+  addExpense: (expense) => set((state) => ({ expenses: [...state.expenses, expense] })),
+  removeAllExpenses: () => set({ expenses: [] }),
 }))
 
-// type tSummary = {
-//   _id : string,
-//   totalSpent : number,
-//   count : number
-
-// }
-// interface IExpenseSummary {
-//   summary : tSummary[] 
-// }
-// export const useExpenseSummaryStore = create((set)=>{
-//   summary : []
-// })
 
 
+
+type summary = {
+  _id: string,
+  totalSpent: number,
+  count: number
+}
+
+export interface IExpenseSummary {
+  summaries: summary[]
+  setSummary: (newSummaries: summary[]) => void;
+  removeAllSummary: () => void;
+}
+
+
+export const useExpenseSummary = create<IExpenseSummary>((set) => ({
+  summaries: [],
+  setSummary: (newSummaries) => set({ summaries: newSummaries }),
+  removeAllSummary: () => set({ summaries: [] }),
+}))
 
 // export const useFetch = <T= unknown> (url: string) => {
 //     const [data, setData] = useState<T>();

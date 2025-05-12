@@ -5,7 +5,7 @@ import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import RenderTable from '@/component/expense-table/render-table'
+// import RenderTable from '@/component/expense-table/render-table'
 
 import data from "./data.json"
 // import { useExpenseStore } from "@/lib/useExpenseStore"
@@ -25,7 +25,7 @@ export default function Page() {
                 <ChartAreaInteractive />
               </div>
               <DataTable data={data.message} />
-              <RenderTable/>
+              {/* <RenderTable/> */}
               
             </div>
           </div>
