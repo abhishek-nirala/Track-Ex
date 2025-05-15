@@ -16,20 +16,35 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Bar, BarChart, LabelList, CartesianGrid, XAxis } from "recharts";
-import { useExpenseSummary } from "@/lib/useExpenseStore";
+import { IExpenseSummary } from "@/lib/useExpenseStore";
+import axios from "axios";
+// import { useToast } from "@/hooks/use-toast";
+// import printMessage from "@/errorMsg";
+// import { useExpenseSummary } from "@/lib/useExpenseStore";
 // import { TrendingUp } from "lucide-react";
-import { fetchAndUpdateStores } from "@/app/fetchUpdateStores";
 
 export function ChartAreaInteractive() {
-    React.useEffect(() => {
-        const fetchData = async () => {
-            await fetchAndUpdateStores()
-        }
-        fetchData();
-    }, [])
 
-    const chartData = useExpenseSummary((state) => state.summaries);
+    // const chartData = useExpenseSummary((state) => state.summaries);
+    const [chartData, setChartData] = React.useState<IExpenseSummary[]>([])
+    // const [loading, setLoading] = React.useState(false)
+    // const {toast} = useToast()
 
+    React.useEffect(()=>{
+        const fetchChartData = async() =>{
+            try {
+                const response = await axios.get("/api/expense?filter=summary")
+                if(!response.data.success){
+                    console.log("failed to fetch expense summary")
+                    // return printMessage(false,"failed to fetch data!",401)
+                }
+                setChartData(response.data.message)
+            } catch (error) {
+               console.log("error while fetching expense summary@chart-are-inter!: ",error) 
+
+            }        }
+        fetchChartData();
+    },[])
     // Handle empty or undefined data
     if (!chartData || chartData.length === 0) {
         return <div>No data available to display.</div>;

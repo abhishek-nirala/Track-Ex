@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
                 },
                 {
                     $group: {
-                        _id :{$toLower : "$category"} ,
+                        _id: { $toLower: "$category" },
                         totalSpent: { $sum: "$amount" },
                         count: { $count: {} }
                     }
@@ -135,5 +135,24 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.log("error @ expense.ts : ", error)
         return printMessage(false, "Couldn't saved the entry.Something went wrong!", 500)
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    await connectDb()
+    const id = request.nextUrl.searchParams.get("id")
+    console.log("id: ", id)
+    try {
+
+        const response = await Expense.findByIdAndDelete(id)
+        if (!response) {
+            return printMessage(false, "couldn't be deleted", 404)
+        }
+        return printMessage(true,"successfully deleted",200)
+
+    } catch (error) {
+        const err = error as Error
+        console.log("error while deleting the expense: ",error)
+        return printMessage(false,`${err.message}`,500)
     }
 }
