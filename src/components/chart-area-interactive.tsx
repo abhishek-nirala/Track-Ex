@@ -89,7 +89,7 @@ export function ChartAreaInteractive() {
                             tickFormatter={(value) => (value ? value.toUpperCase() : "")}
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                        <Bar dataKey="totalSpent" fill="var(--color-desktop)" radius={8}>
+                        <Bar dataKey="totalSpent" fill="#4caf50" radius={8}>
                             <LabelList position="top" offset={12} className="fill-foreground" fontSize={12} />
                         </Bar>
                     </BarChart>
