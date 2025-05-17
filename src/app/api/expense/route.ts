@@ -148,11 +148,31 @@ export async function DELETE(request: NextRequest) {
         if (!response) {
             return printMessage(false, "couldn't be deleted", 404)
         }
-        return printMessage(true,"successfully deleted",200)
+        return printMessage(true, "successfully deleted", 200)
 
     } catch (error) {
         const err = error as Error
-        console.log("error while deleting the expense: ",error)
-        return printMessage(false,`${err.message}`,500)
+        console.log("error while deleting the expense: ", error)
+        return printMessage(false, `${err.message}`, 500)
+    }
+}
+
+export async function PATCH(request: NextRequest) {
+    await connectDb();
+    const { id, category, amount, desc } = await request.json();
+    try {
+        const response = await Expense.findByIdAndUpdate(id, {
+            category, amount, desc
+        }, {
+            new: true,
+            runValidators: true
+        })
+        console.log("response @patch ", response)
+        return printMessage(true, "Expense was updated successfully", 200)
+
+    } catch (error) {
+        console.log("error while updating the expense@expense/route.ts: ", error)
+        return printMessage(false, "Couldn't update the Expense details! something went wrong", 500)
+
     }
 }

@@ -34,8 +34,18 @@ export default function Page() {
     fetchExpense();
   }, [])
 
-  const removeDeletedExpense = (id:string) =>{
-    setData((prev)=>prev.filter((data)=> data._id !== id))
+  const removeDeletedExpense = (id: string) => {
+    setData((prev) => prev.filter((data) => data._id !== id))
+  }
+  const showUpdatedData = (id: string, category: string, amount: number, desc: string) => {
+    console.log("data updated in the ui", id, category, amount)
+    setData((prev) =>
+      prev.map((expense) =>
+        expense._id === id
+          ? { ...expense, category: category, amount: amount, description: desc }
+          : expense
+      )
+    )
   }
 
   // console.log("data: ", data)
@@ -55,7 +65,7 @@ export default function Page() {
                 <div className="px-4 lg:px-6">
                   <ChartAreaInteractive />
                 </div>
-                <DataTable data={data} onDelete={removeDeletedExpense}/>
+                <DataTable data={data} onDelete={removeDeletedExpense} onUpdate={showUpdatedData} />
               </>
               )}
               {/* <RenderTable/> */}

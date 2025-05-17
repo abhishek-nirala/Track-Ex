@@ -52,12 +52,12 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 // import {
-  // DropdownMenu,
-  // DropdownMenuCheckboxItem,
-  // DropdownMenuContent,
-  // DropdownMenuItem,
-  // DropdownMenuSeparator,
-  // DropdownMenuTrigger,
+// DropdownMenu,
+// DropdownMenuCheckboxItem,
+// DropdownMenuContent,
+// DropdownMenuItem,
+// DropdownMenuSeparator,
+// DropdownMenuTrigger,
 // } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -93,6 +93,7 @@ import {
   // TabsTrigger,
 } from "@/components/ui/tabs"
 import axios, { AxiosError } from "axios"
+import { toast } from "@/hooks/use-toast"
 
 export const ExpenseSchema = z.object({
   _id: z.string().length(24), // MongoDB ObjectId format
@@ -138,10 +139,12 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof ExpenseSchema>> }) {
 
 export function DataTable({
   data,
-  onDelete
+  onDelete,
+  onUpdate
 }: {
   data: z.infer<typeof ExpenseSchema>[],
   onDelete: (id: string) => void
+  onUpdate: (id: string, category: string, amount: number, desc: string) => void
 }) {
   // const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
@@ -200,7 +203,7 @@ export function DataTable({
       accessorKey: "category",
       header: () => <div className="text-left">Category</div>,
       cell: (data) => {
-        return <TableCellViewer item={data.row.original} onDelete={onDelete} />
+        return <TableCellViewer item={data.row.original} onDelete={onDelete} onUpdate={onUpdate} />
       },
 
 
@@ -255,7 +258,7 @@ export function DataTable({
         const amount = parseFloat(row.getValue("amount"))
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
-          currency: localStorage.getItem("currency") || "INR",
+          currency: localStorage.getItem("currency") || "INR", //todo
 
         }).format(amount)
 
@@ -284,10 +287,10 @@ export function DataTable({
         //     <DropdownMenuItem>Delete</DropdownMenuItem>
         //   </DropdownMenuContent>
         // </DropdownMenu>
-        
+
         <>
 
-        <h1>  </h1>
+          <h1>  </h1>
         </>
       ),
     },
@@ -576,9 +579,11 @@ export function DataTable({
   )
 }
 
-function TableCellViewer({ item, onDelete }: { item: z.infer<typeof ExpenseSchema>, onDelete: (id: string) => void }) {
+function TableCellViewer({ item, onDelete, onUpdate }: { item: z.infer<typeof ExpenseSchema>, onDelete: (id: string) => void, onUpdate: (id: string, category: string, amount: number, desc: string) => void }) {
   const [isDelete, setDelete] = React.useState(false)
-
+  const [category, setCategory] = React.useState(item.category ?? "")
+  const [amount, setAmount] = React.useState<number>(item.amount ?? 0.00)
+  const [desc, setDesc] = React.useState(item.description ?? "")
   const handleExpenseDelete = async (id: string) => {
 
     try {
@@ -587,6 +592,36 @@ function TableCellViewer({ item, onDelete }: { item: z.infer<typeof ExpenseSchem
         console.log("expense deleted")
         onDelete(id)
       }
+    } catch (err) {
+      const e = err as AxiosError
+      console.log(e)
+    }
+  }
+  const handleExpenseUpdate = async (id: string) => {
+    // console.log(id,category, amount )
+    try {
+      const response = await axios.patch(`/api/expense`, {
+        id,
+        category,
+        amount,
+        desc
+      })
+      console.log("response", response)
+      if (response) {
+        console.log("expense updated")
+        toast({
+          title: "Updated",
+          description: response.data.message
+        })
+        onUpdate(id, category, Number(amount), desc)
+      } else {
+
+        toast({
+          title: "Failed",
+          description: "Couldn't update! try again."
+        })
+      }
+
     } catch (err) {
       const e = err as AxiosError
       console.log(e)
@@ -611,13 +646,19 @@ function TableCellViewer({ item, onDelete }: { item: z.infer<typeof ExpenseSchem
             <Label htmlFor="category" className="text-right">
               Category
             </Label>
-            <Input id="category" defaultValue={item.category} className="col-span-3" />
+            <Input type='string' onChange={(e) => setCategory(e.target.value)} id="category" defaultValue={item.category} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="amount" className="text-right">
               Amount
             </Label>
-            <Input id="amount" defaultValue={item.amount} className="col-span-3" />
+            <Input type="number" onChange={(e) => setAmount(Number(e.target.value))} id="amount" defaultValue={item.amount} className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="description" className="text-right">
+              Description
+            </Label>
+            <Input type="string" onChange={(e) => setDesc(e.target.value)} id="description" defaultValue={item.description} className="col-span-3" />
           </div>
           <Button onClick={() => setDelete(true)}>Delete</Button>
 
@@ -634,7 +675,7 @@ function TableCellViewer({ item, onDelete }: { item: z.infer<typeof ExpenseSchem
         <SheetFooter>
           <SheetClose asChild>
             <div className="w-full flex justify-between">
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" onClick={() => handleExpenseUpdate(item._id)}>Save changes</Button>
             </div>
           </SheetClose>
         </SheetFooter>
