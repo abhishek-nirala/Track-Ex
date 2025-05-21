@@ -210,13 +210,13 @@ export function DataTable({
     },
     {
       accessorKey: "date",
-      header: ({ column }) => <div className="text-left">Date
+      header: ({ column }) => <div className="text-left w-full">Date
         <Button className="text-left border-4"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
 
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="ml-2 h-4 w-4 border-none" />
         </Button>
       </div>,
       cell: ({ row }) => {
@@ -242,7 +242,7 @@ export function DataTable({
       accessorKey: "amount",
       header: ({ column }) => {
         return (<>
-          <div className="w-full text-right bg ml-9">Amount
+          <div className="w-full text-right ml-9">Amount
             <Button className=""
               variant="ghost"
               onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -268,26 +268,6 @@ export function DataTable({
     {
       id: "actions",
       cell: () => (
-        // <DropdownMenu>
-        //   <DropdownMenuTrigger asChild>
-        //     <Button
-        //       variant="ghost"
-        //       className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-        //       size="icon"
-        //     >
-        //       <MoreVerticalIcon />
-        //       <span className="sr-only">Open menu</span>
-        //     </Button>
-        //   </DropdownMenuTrigger>
-        //   <DropdownMenuContent align="end" className="w-32">
-        //     <DropdownMenuItem>Edit</DropdownMenuItem>
-        //     <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        //     <DropdownMenuItem>Favorite</DropdownMenuItem>
-        //     <DropdownMenuSeparator />
-        //     <DropdownMenuItem>Delete</DropdownMenuItem>
-        //   </DropdownMenuContent>
-        // </DropdownMenu>
-
         <>
 
           <h1>  </h1>

@@ -53,7 +53,7 @@ export function SectionCards() {
         <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="text-muted-foreground">
             {
-              `Brought ${highestExpenseObj._id.toUpperCase()} only ${`${highestExpenseObj.count === 1 ? "once" : highestExpenseObj.count} times `} in this month`
+              `Spent in ${highestExpenseObj._id.toUpperCase()} only ${`${highestExpenseObj.count === 1 ? "once" : highestExpenseObj.count} times `} in this month`
             }
           </div>
         </CardFooter>
