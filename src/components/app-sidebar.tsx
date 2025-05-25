@@ -14,6 +14,7 @@ import {
   Home,
   LayoutDashboardIcon,
   ListIcon,
+  LogOut,
   // SearchIcon,
   // SettingsIcon,
   // UsersIcon,
@@ -35,11 +36,6 @@ import {
 import { useSession } from "next-auth/react"
 
 const data = {
-  // user: {
-  //   name: "tofu",
-  //   email: "m@example.com",
-  //   avatar: "/avatars/tofu.jpg",
-  // },
   navMain: [
     {
       title: "Home",
@@ -53,102 +49,20 @@ const data = {
     },
     {
       title: "Bills",
-      url: "Bills",
+      url: "/bills",
       icon: ListIcon,
     },
-    //   {
-    //     title: "Projects",
-    //     url: "#",
-    //     icon: FolderIcon,
-    //   },
+    {
+      title: "Log-Out",
+      url: "#",
+      icon: LogOut,
+    },
     //   {
     //     title: "Team",
     //     url: "#",
     //     icon: UsersIcon,
     //   },
   ],
-  // navClouds: [
-  //   {
-  //     title: "Capture",
-  //     icon: CameraIcon,
-  //     isActive: true,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Proposal",
-  //     icon: FileTextIcon,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Prompts",
-  //     icon: FileCodeIcon,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  // ],
-  // navSecondary: [
-  //   {
-  //     title: "Settings",
-  //     url: "#",
-  //     icon: SettingsIcon,
-  //   },
-  //   {
-  //     title: "Get Help",
-  //     url: "#",
-  //     icon: HelpCircleIcon,
-  //   },
-  //   {
-  //     title: "Search",
-  //     url: "#",
-  //     icon: SearchIcon,
-  //   },
-  // ],
-  // documents: [
-  //   {
-  //     name: "Data Library",
-  //     url: "#",
-  //     icon: DatabaseIcon,
-  //   },
-  //   {
-  //     name: "Reports",
-  //     url: "#",
-  //     icon: ClipboardListIcon,
-  //   },
-  //   {
-  //     name: "Word Assistant",
-  //     url: "#",
-  //     icon: FileIcon,
-  //   },
-  // ],
 
 }
 

@@ -1,7 +1,9 @@
+"use client"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, BarChart3, PieChart, TrendingUp, CreditCard, Clock, Shield } from "lucide-react"
+import { signIn} from 'next-auth/react'
 
 export default function LandingPage() {
   return (
@@ -27,14 +29,16 @@ export default function LandingPage() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link href="/signin">
-              <Button variant="outline" className="hidden sm:flex">
-                Sign In
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button className="bg-emerald-500 hover:bg-emerald-600">Sign Up Free</Button>
-            </Link>
+            {/* <Link href="/signin"> */}
+            <Button variant="outline" className="hidden sm:flex" onClick={(() => signIn())}>
+              Sign In
+            </Button>
+            {/* </Link> */}
+            {/* <Link href="/signup"> */}
+            <Button className="bg-emerald-500 hover:bg-emerald-600" onClick={() => signIn()}>
+              Sign Up Free
+            </Button>
+            {/* </Link> */}
           </div>
         </div>
       </header>
@@ -54,12 +58,12 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/signup">
-                    <Button className="bg-emerald-500 hover:bg-emerald-600">
+                    <Button className="bg-emerald-500 hover:bg-emerald-600"
+                      onClick={()=>signIn()} 
+                    >
                       Get Started Free
                       <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
-                  </Link>
                   <Link href="#how-it-works">
                     <Button variant="outline">See How It Works</Button>
                   </Link>
@@ -78,7 +82,7 @@ export default function LandingPage() {
               <div className="flex items-center justify-center">
                 <div className="relative h-[350px] w-[300px] sm:h-[400px] sm:w-[350px] lg:h-[500px] lg:w-[450px] overflow-hidden rounded-lg border bg-background shadow-xl">
                   <Image
-                    src="/placeholder.svg?height=1000&width=800"
+                    src="/expense.png"
                     alt="ExpenseTracker App Dashboard"
                     fill
                     className="object-cover"
