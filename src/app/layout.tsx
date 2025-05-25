@@ -15,10 +15,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Track-EX",
-  description: "Send Your Bills and Look up your expenses at one place",
-};
+export const metadata:Metadata = {
+  title: "ExpenseTracker - Take Control of Your Finances",
+  description:
+    "Track expenses, manage budgets, and achieve your financial goals with our intuitive expense tracker app.",
+}
 
 export default function RootLayout({
   children,

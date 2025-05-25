@@ -1,3 +1,41 @@
+// 'use client'
+
+// import { Button } from "@/components/button"
+// import { useSession, signIn, signOut } from "next-auth/react"
+// import Image from "next/image"
+// export default function Home() {
+
+//   const { data: session } = useSession()
+
+
+//   if (session) {
+//     return (
+//       <>
+//         Signed in as {session.user?.email} <br />
+//         and profile image {console.log("session : ", session)} <br />
+//         {session?.user?.image &&
+//           <Image
+//             src={session?.user?.image}
+//             alt="User's profile picture"
+//             width={120}
+//             height={120}
+//             loading="lazy"
+//             prefix=""
+//           />
+//         }
+//         <Button className="m-5" onClick={() => signOut()}>Sign out</Button>
+//       </>
+//     )
+//   }
+//   return (
+//     <>
+//       Not signed in <br />
+//       <Button className="m-5" onClick={() => signIn()}>Sign in</Button>
+//     </>
+//   )
+// }
+
+
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -40,7 +78,7 @@ export default function LandingPage() {
       </header>
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        <section className=" w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
               <div className="flex flex-col justify-center space-y-4">
@@ -257,7 +295,7 @@ export default function LandingPage() {
                 </div>
                 <p className="text-gray-500">
                   &quot;The insights from ExpenseTracker helped me identify unnecessary business expenses and save over
-                  $5,000 in the first year. Highly recommended!&quot;
+                  $5,000 in the first year. Highly recommended&quot;
                 </p>
               </div>
               <div className="flex flex-col space-y-4 rounded-lg border bg-background p-6 shadow-sm">
