@@ -11,10 +11,8 @@ import {
   // FileTextIcon,
   // FolderIcon,
   // HelpCircleIcon,
-  Home,
   LayoutDashboardIcon,
   ListIcon,
-  LogOut,
   // SearchIcon,
   // SettingsIcon,
   // UsersIcon,
@@ -38,11 +36,6 @@ import { useSession } from "next-auth/react"
 const data = {
   navMain: [
     {
-      title: "Home",
-      url: "/",
-      icon: Home,
-    },
-    {
       title: "Dashboard",
       url: "/dashboard",
       icon: LayoutDashboardIcon,
@@ -51,17 +44,7 @@ const data = {
       title: "Bills",
       url: "/bills",
       icon: ListIcon,
-    },
-    {
-      title: "Log-Out",
-      url: "#",
-      icon: LogOut,
-    },
-    //   {
-    //     title: "Team",
-    //     url: "#",
-    //     icon: UsersIcon,
-    //   },
+    }
   ],
 
 }
@@ -69,7 +52,6 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const { data: session } = useSession()
-  console.log("session: ", session)
   const user = {
     name: session?.user?.name || "username",
     email: session?.user?.email || "user@email.com",
@@ -96,8 +78,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        {/* <NavDocuments items={data.documents} /> */}
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />

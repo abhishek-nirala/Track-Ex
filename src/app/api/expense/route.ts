@@ -11,15 +11,8 @@ export async function GET(request: NextRequest) {
     if (!session) {
         return printMessage(false, "Unauthorize! Please Login to access Protected content.", 401);
     }
-    console.log('logged-in!')
 
     const filter: string[] = request.nextUrl.searchParams.getAll("filter")
-    // console.log("keys @expense/route.ts: ",filter)
-    //   console.log("getAll : ", request.nextUrl.searchParams.getAll("filter"))
-
-
-    // console.log("GET method ended!")
-    // return printMessage(true, "testing!!!",200)
     await connectDb();
 
     try {
@@ -42,46 +35,8 @@ export async function GET(request: NextRequest) {
                 }
             ])
 
-            // console.log("response@summary: ",response)
             return printMessage(true, response, 200)
         }
-        //     if (response) {
-        //         console.log("Expense's route response : ", response)
-        //         //TODO:check the returned response.
-        //         return printMessage(true, `${response}`, 200)
-        //     }
-
-        // }
-        // if (filter.includes("month")) {
-
-        // }
-        // if (filter.includes("category")) {
-        //     const category = request.nextUrl.searchParams.get("category")
-        //     const response = await Expense.aggregate([
-        //         {
-        //             $match: {
-        //                 email,
-        //                 category
-        //             }
-        //         },
-        //         {
-        //             $group: {
-        //                 _id: "$category",
-        //                 totalSpent: { $sum: "$amount" },
-        //                 count: { $count: {} }
-        //             }
-        //         }
-        //     ])
-        //     if (response) {
-        //         console.log("Expense's route response : ", response)
-        //         //TODO:check the returned response.
-        //         return printMessage(true, `${response}`, 200)
-        //     }
-
-        // }
-        // if (filter.includes("amount")) {
-
-        // }
 
         const today = new Date()
         const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
@@ -101,7 +56,6 @@ export async function GET(request: NextRequest) {
 
         ]) //retrieves the most recent one & expenses of only the current month till date.
         if (response) {
-            // console.log("Expense's route response : ", response)
 
             return printMessage(true, response, 200)
         }
@@ -141,7 +95,6 @@ export async function POST(req: NextRequest) {
 export async function DELETE(request: NextRequest) {
     await connectDb()
     const id = request.nextUrl.searchParams.get("id")
-    console.log("id: ", id)
     try {
 
         const response = await Expense.findByIdAndDelete(id)
@@ -167,8 +120,7 @@ export async function PATCH(request: NextRequest) {
             new: true,
             runValidators: true
         })
-        console.log("response @patch ", response)
-        return printMessage(true, "Expense was updated successfully", 200)
+        return printMessage(true, `Expense was updated successfully ${response}`, 200)
 
     } catch (error) {
         console.log("error while updating the expense@expense/route.ts: ", error)

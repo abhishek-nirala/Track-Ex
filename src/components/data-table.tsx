@@ -94,6 +94,7 @@ import {
 } from "@/components/ui/tabs"
 import axios, { AxiosError } from "axios"
 import { toast } from "@/hooks/use-toast"
+import { AddExpense } from "@/component/AddExpenseComp"
 
 export const ExpenseSchema = z.object({
   _id: z.string().length(24), // MongoDB ObjectId format
@@ -319,11 +320,11 @@ export function DataTable({
       defaultValue="outline"
       className="flex w-full flex-col justify-start gap-6"
     >
-      {/* <div className="flex items-center justify-between px-4 lg:px-6">
-        <Label htmlFor="view-selector" className="sr-only">
+      <div className="flex items-center justify-between px-4 lg:px-6">
+        {/* <Label htmlFor="view-selector" className="sr-only">
           View
-        </Label>
-        <Select defaultValue="outline">
+        </Label> */}
+        {/* <Select defaultValue="outline">
           <SelectTrigger
             className="@4xl/main:hidden flex w-fit"
             id="view-selector"
@@ -397,8 +398,12 @@ export function DataTable({
             <PlusIcon />
             <span className="hidden lg:inline">Add Section</span>
           </Button>
-        </div>
-      </div> */}
+        </div> */}
+        {/* <Button variant="outline" size="sm">
+          <PlusIcon />
+          <span className="hidden lg:inline">Add Section</span>
+        </Button> */}
+      </div>
       <TabsContent
         value="outline"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
@@ -418,6 +423,10 @@ export function DataTable({
                 onChange={e => table.setGlobalFilter(String(e.target.value))}
                 className="max-w-sm"
               />
+              {/* <Button className="text-xl" onClick={()=>console.warn("Button clicked!")}>
+                +
+              </Button> */}
+              <AddExpense/>
             </div>
             <Table >
               <TableHeader className="sticky top-0 z-10 bg-muted">
