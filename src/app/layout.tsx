@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SessionWrapper from "@/component/SessionWrapper";
 import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/component/Footer";
 
 
 const geistSans = Geist({
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata:Metadata = {
-  title: "ExpenseTracker - Take Control of Your Finances",
+  title: "TrackEx - Take Control of Your Finances",
   description:
     "Track expenses, manage budgets, and achieve your financial goals with our intuitive expense tracker app.",
 }
@@ -35,6 +36,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           {children}
+          <Footer/>
           <Toaster/>
         </body>
       </SessionWrapper>
