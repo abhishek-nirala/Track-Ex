@@ -119,8 +119,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from 'axios'
 import { toast } from "@/hooks/use-toast"
+import {useRouter} from 'next/navigation'
 
 function Expense() {
+
+  const router = useRouter()
 
   const formSchema = z.object({
     category: z.string().min(2, {
@@ -164,6 +167,8 @@ function Expense() {
       }
     } catch (e) {
       console.log("error @expense/page.tsx : ", e)
+    }finally{
+      router.refresh()
     }
   }
   return (<>
