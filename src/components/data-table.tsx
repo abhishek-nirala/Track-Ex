@@ -573,6 +573,7 @@ function TableCellViewer({ item, onDelete, onUpdate }: { item: z.infer<typeof Ex
   const [category, setCategory] = React.useState(item.category ?? "")
   const [amount, setAmount] = React.useState<number>(item.amount ?? 0.00)
   const [desc, setDesc] = React.useState(item.description ?? "")
+
   const handleExpenseDelete = async (id: string) => {
 
     try {
@@ -586,6 +587,7 @@ function TableCellViewer({ item, onDelete, onUpdate }: { item: z.infer<typeof Ex
       console.log(e)
     }
   }
+
   const handleExpenseUpdate = async (id: string) => {
     // console.log(id,category, amount )
     try {

@@ -217,7 +217,7 @@ function Expense() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <DrawerClose type="submit">Submit</DrawerClose>
       </form>
     </Form>
   </>)
