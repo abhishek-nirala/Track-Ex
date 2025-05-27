@@ -38,7 +38,7 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1 text-sm">
           <div className="text-muted-foreground">
-            Total amount spent in this month
+            Total amount spent in this month until now
           </div>
         </CardFooter>
       </Card>

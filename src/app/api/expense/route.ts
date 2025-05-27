@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     const email = session?.user?.email;
     const token = await getToken({ req })
 
-    console.log("token @expense/route: ", token);
+    // console.log("token @expense/route: ", token);
     await connectDb();
 
     try {

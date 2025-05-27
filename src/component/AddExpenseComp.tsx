@@ -119,7 +119,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from 'axios'
 import { toast } from "@/hooks/use-toast"
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 function Expense() {
 
@@ -165,10 +165,11 @@ function Expense() {
           variant: "default"
         })
       }
+
     } catch (e) {
       console.log("error @expense/page.tsx : ", e)
-    }finally{
-      router.refresh()
+    } finally {
+      window.location.reload()
     }
   }
   return (<>
