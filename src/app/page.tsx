@@ -294,14 +294,12 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/signup">
-                  <Button className="bg-emerald-500 hover:bg-emerald-600 px-8">Sign Up Free</Button>
-                </Link>
-                <Link href="/signin">
-                  <Button variant="outline" className="px-8">
+               
+                  <Button className="bg-emerald-500 hover:bg-emerald-600 px-8" onClick={(() => signIn())}>Sign Up Free</Button>
+              
+                  <Button variant="outline" className="px-8" onClick={()=>signIn()}>
                     Sign In
                   </Button>
-                </Link>
               </div>
               <p className="text-sm text-gray-500">No credit card required. Free plan available.</p>
             </div>
